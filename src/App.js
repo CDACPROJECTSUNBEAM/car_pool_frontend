@@ -1,24 +1,57 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
+import AdminSigninScreen from './screens/AdminSigninScreen/AdminSigninScreen';
+import UserSignupScreen from './screens/UserSignupScreen/UserSignupScreen';
+import UserSigninScreen from './screens/UserSigninScreen/UserSigninScreen';
+import DriverSignupScreen from './screens/DriverSignupScreen/DriverSignupScreen';
+import DriverSigninScreen from './screens/DriverSigninScreen/DriverSigninScreen';
+import NotFoundScreen from './screens/NotFoundScreen/NotFoundScreen';
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from 'react-redux';
+import AdminScreen from './screens/AdminScreen/AdminScreen';
+import { useEffect } from 'react';
+import ViewRides from './screens/ViewRides/ViewRides';
+import ReqRide from './screens/ReqRide/ReqRide';
+import UserDashboard from './screens/UserDashboard/UserDashboard';
+import DriverDashboard from './screens/DriverDashboard/DriverDashboard';
+import SearchRideReq from './screens/SearchRideReq/SearchRideReq';
+import PublishRide from './screens/PublishRide/PublishRide';
+import AddVehicle from './screens/AddVehicle/AddVehicle';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import EditProfile from './screens/EditProfile/EditProfile';
 
 function App() {
+  //var token = window.sessionStorage.getItem("loginToken")
+
+  //const {isAdminAuthenticated} = useSelector((state) => state.admin)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+      <ToastContainer theme="dark" />
+        <Routes>
+          <Route path="/" element={<DashboardScreen />} />
+          {/* <Route path="/admin" element={(isAdminAuthenticated) ? <AdminScreen /> : <AdminSigninScreen />} /> */}
+          <Route path="/admin" element={<AdminSigninScreen />} />
+          <Route path="/admin/home" element={<AdminScreen />} /> 
+          <Route path="/user/signup" element={<UserSignupScreen />} />
+          <Route path="/user/signin" element={<UserSigninScreen />} />
+          <Route path="/driver/signup" element={<DriverSignupScreen />} />
+          <Route path="/driver/signin" element={<DriverSigninScreen />} />
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/viewRides" element={<ViewRides />} />
+          <Route path="/user/reqRide" element={<ReqRide />} />
+          <Route path="/driver" element={<DriverDashboard />} />
+          <Route path="/driver/addVehicle" element={<AddVehicle />} />
+          <Route path="/driver/searchRideRequest" element={<SearchRideReq />} />
+          <Route path="/driver/publishRide" element={<PublishRide />} />
+          <Route path="/profile" element={<ProfileScreen />} />
+          <Route path="/editProfile" element={<EditProfile />} />
+          <Route path="*" element={<NotFoundScreen />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
