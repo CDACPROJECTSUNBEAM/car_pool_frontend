@@ -5,7 +5,7 @@ import register from "../../images/register.avif";
 import { useDispatch } from "react-redux";
 import { signup } from "../../actions/userAuthAction";
 import { toast } from "react-toastify";
-import { USER_SIGNUP_SUCCESS } from "../../constants/authConstants";
+import Header from "../../components/Header/Header";
 
 const UserSignupScreen = () => {
   const [fname, setFname] = useState("");
@@ -50,22 +50,6 @@ const UserSignupScreen = () => {
 
     dispatch(signup(userDetails, toast))
 
-    // fetch('http://localhost:8081/api/auth/signup', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(userDetails),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   dispatch({
-    //     type: USER_SIGNUP_SUCCESS,
-    //     payload: data,
-    //   });
-    // })
-    // .catch(error => console.error('Error creating user:', error));
-
     setFname(p => "");
     setLname("");
     setEmail("");
@@ -82,6 +66,7 @@ const UserSignupScreen = () => {
   const ref = useRef();
   return (
     <>
+    <Header />
       <div className="card mx-auto register_card">
         <form onSubmit={submitData}>
           <div className="row g-0">

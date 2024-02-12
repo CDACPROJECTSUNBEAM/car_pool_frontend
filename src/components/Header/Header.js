@@ -7,7 +7,7 @@ const Header = (props) => {
     <>
       <nav class={`navbar navbar-expand-lg navbar-light bg-light ${props.prop_name} shadow`}>
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Ride My Way</a>
+          <Link class="navbar-brand" to="/">Ride My Way</Link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -17,7 +17,11 @@ const Header = (props) => {
             </ul>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <button class="nav-link active btn" style={{backgroundColor: "rgb(68, 158, 247)"}} href="#">Get Started</button>
+                <button class="nav-link active btn" style={{backgroundColor: "rgb(68, 158, 247)"}}>
+                  <Link to="/user/signup" style={{textDecoration: "none", color: "black"}}>
+                  Get Started
+                  </Link>
+                </button>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Login </a>

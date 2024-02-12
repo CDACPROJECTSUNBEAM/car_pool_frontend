@@ -28,7 +28,6 @@ function App() {
   return (
     <>
       <Router>
-      <ToastContainer theme="dark" />
         <Routes>
           <Route path="/" element={<DashboardScreen />} />
           {/* <Route path="/admin" element={(isAdminAuthenticated) ? <AdminScreen /> : <AdminSigninScreen />} /> */}
@@ -48,6 +47,7 @@ function App() {
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
+        <ToastContainer theme="dark" />
       </Router>
     </>
   );

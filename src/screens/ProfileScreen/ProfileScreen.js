@@ -1,12 +1,47 @@
 import React, { useState } from "react";
 import "./ProfileScreen.css";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { updateProfileDetails } from "../../actions/userAuthAction";
+
 
 const ProfileScreen = () => {
   const [toggle, setToggle] = useState(false);
 
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [dob, setDob] = useState("");
+  const [contact, setContact] = useState();
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
+
+  const data = useSelector(state => state.userSignin);
+  let user = data.response;
+
   const onEditClick = () => {
     setToggle(true);
   };
+
+  const dispatch = useDispatch();
+
+  const updateProfile = (e) => {
+    const updateDetails = {
+      id: user.id,
+      fname,
+      lname,
+      email,
+      password: user.password,
+      contact,
+      gender,
+      role: user.role,
+      dob,
+      address
+    }
+
+    dispatch(updateProfileDetails(updateDetails, toast));
+  }
+
   return (
     <>
       {!toggle ? (
@@ -20,7 +55,7 @@ const ProfileScreen = () => {
                     Email -
                   </div>
                   <div className="col-md-8 col-sm-12">
-                  <span class="text-muted">akshat@gmail.com</span>
+                  <span class="text-muted">{user.email}</span>
                   </div>
                 </div>
               </span>
@@ -30,7 +65,7 @@ const ProfileScreen = () => {
                   Contact -
                   </div>
                   <div className="col-md-8 col-sm-12">
-                  <span class="text-muted">9131236003</span>
+                  <span class="text-muted">{user.contact}</span>
                   </div>
                 </div>
               </span>
@@ -40,7 +75,7 @@ const ProfileScreen = () => {
                   Gender -
                   </div>
                   <div className="col-md-8 col-sm-12">
-                  <span class="text-muted">male</span>
+                  <span class="text-muted">{user.gender}</span>
                   </div>
                 </div>
               </span>
@@ -50,7 +85,7 @@ const ProfileScreen = () => {
                   Birth date -
                   </div>
                   <div className="col-md-8 col-sm-12">
-                  <span class="text-muted">2001-10-22</span>
+                  <span class="text-muted">{user.dob}</span>
                   </div>
                 </div>
               </span>
@@ -60,7 +95,7 @@ const ProfileScreen = () => {
                   Address -
                   </div>
                   <div className="col-md-8 col-sm-12">
-                  <span class="text-muted">Burhanpur, M.P</span>
+                  <span class="text-muted">{user.address}</span>
                   </div>
                 </div>
               </span>
@@ -80,15 +115,19 @@ const ProfileScreen = () => {
         </div>
       ) : (
         <>
+        <form onSubmit={updateProfile}>
         <div className="mb-3">
           <label for="exampleInputEmail1" className="form-label">
             First Name
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="fname"
+            value={user.fname}
+            onChange={(e) => setFname(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -96,10 +135,13 @@ const ProfileScreen = () => {
             Last Name
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="lname"
+            value={user.lname}
+            onChange={(e) => setLname(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -111,6 +153,9 @@ const ProfileScreen = () => {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="email"
+            value={user.email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -118,10 +163,13 @@ const ProfileScreen = () => {
             Contact No.
           </label>
           <input
-            type="email"
+            type="number"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="contact"
+            value={user.contact}
+            onChange={(e) => setContact(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -129,10 +177,13 @@ const ProfileScreen = () => {
             Gender
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="gender"
+            value={user.gender}
+            onChange={(e) => setGender(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -140,10 +191,13 @@ const ProfileScreen = () => {
             Birth date
           </label>
           <input
-            type="email"
+            type="date"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="dob"
+            value={user.dob}
+            onChange={(e) => setDob(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -151,15 +205,20 @@ const ProfileScreen = () => {
             Address
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="address"
+            value={user.address}
+            onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-        <button type="button" onClick={() => setToggle(false)} className="btn btn-primary">
+
+        <button type="submit" className="btn btn-primary">
           Save Changes
         </button>
+        </form>
       </>
       )}
     </>

@@ -5,16 +5,11 @@ import UserFooter from "../../components/UserFooter/UserFooter";
 import "./AdminScreen.css";
 
 const AdminScreen = () => {
-  const adminDetails = useSelector((state) => state.admin)
-
-  // useEffect(() => {
-  //   if(adminDetails && adminDetails.token){
-  //     localStorage.setItem('token', adminDetails.token)
-  //   }
-  // }, [adminDetails])
+    const data = useSelector(state => state.userSignin);
+  let user = data.response;
   return (
     <>
-      <UserNavbar user={"Admin"} link={"/admin/home"} />
+      <UserNavbar user={user} link={"/admin/home"} />
 
       <div class="container mt-5">
     <div class="row">

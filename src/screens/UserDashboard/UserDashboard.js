@@ -5,11 +5,14 @@ import reqRideImg from "../../images/requestRide.jpg"
 import { Link } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
+import { useSelector } from "react-redux";
 
 const UserDashboard = () => {
+  const data = useSelector(state => state.userSignin);
+  let user = data.response;
   return (
     <>
-      <UserNavbar name={"Akshat Shah"} link={"/user"} />
+      <UserNavbar user={user} link={"/user"} />
 
       <div className="container my-3 text-center">
         <h1 className="mb-5 mt-5">User Dashboard</h1>

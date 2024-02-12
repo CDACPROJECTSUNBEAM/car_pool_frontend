@@ -8,6 +8,7 @@ import checked from "../../images/checked.svg";
 import carRide from "../../images/riding-car.svg";
 import dashboard2 from "../../images/dashboard2.svg";
 import dashboard3 from "../../images/dashboard3.svg";
+import { Link } from "react-router-dom";
 
 const DashboardScreen = () => {
   return (
@@ -31,7 +32,9 @@ const DashboardScreen = () => {
             </p>
             <div className="text-center">
               <button className="my-3 shadow start_btn">
+                <Link to="/user/signup" style={{textDecoration: "none", color: "black"}}>
                 Start Your Journey With Us
+                </Link>
               </button>
             </div>
           </div>

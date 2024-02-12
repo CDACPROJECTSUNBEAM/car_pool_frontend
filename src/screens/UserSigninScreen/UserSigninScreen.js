@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import "./UserSigninScreen.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../images/login.avif";
 import { signin } from '../../actions/userAuthAction';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
-import { USER_SIGNIN_SUCCESS } from '../../constants/authConstants';
+import Header from "../../components/Header/Header";
 
 const UserSigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const submitData = (e) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ const UserSigninScreen = () => {
       email, password
     }
 
-    dispatch(signin(userDetails, toast))
+    dispatch(signin(userDetails, toast, navigate))
 
     setEmail("");
     setPassword("");
@@ -32,6 +34,7 @@ const UserSigninScreen = () => {
 
   return (
     <>
+    <Header />
       <div className="card mx-auto register__card">
         <form onSubmit={submitData}>
           <div className="row g-0">

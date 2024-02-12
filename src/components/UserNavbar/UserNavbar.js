@@ -1,11 +1,20 @@
 import React from "react";
 import "./UserNavbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
 import user from "../../images/user.avif";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { logout } from "../../actions/userAuthAction";
 
 const UserNavbar = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutUser = () => {
+    dispatch(logout(toast, navigate));
+  }
+
   return (
     <>
       <nav class={`navbar navbar-expand-lg navbar-light bg-light shadow`}>
@@ -34,9 +43,13 @@ const UserNavbar = (props) => {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
             <ul class="navbar-nav">
               <li class="nav-item welcome">
-                <h5>
-                  Welcome! <span className="text-muted"> {props.name} </span>
+                {
+                  props.user.fname &&
+                  <h5>
+                  Welcome! <span className="text-muted"> {props.user.fname + " " + props.user.lname} </span>
                 </h5>
+                }
+                
               </li>{" "}
               <span className="divide">|</span>
               <li class="nav-item profile">
@@ -46,7 +59,7 @@ const UserNavbar = (props) => {
               </li>{" "}
               <span className="divide">|</span>
               <li class="nav-item logout">
-                <button>Logout</button>
+                <button onClick={logoutUser}>Logout</button>
               </li>
             </ul>
           </div>
@@ -66,7 +79,7 @@ const UserNavbar = (props) => {
             <div class="modal-header">
               
                 <img src={user} height="50" width="50" />
-                <span class="name mt-3 mx-2">Akshat Shah</span>
+                <span class="name mt-3 mx-2">{props.user.fname + " " + props.user.lname}</span>
               <button
                 type="button"
                 class="btn-close"
