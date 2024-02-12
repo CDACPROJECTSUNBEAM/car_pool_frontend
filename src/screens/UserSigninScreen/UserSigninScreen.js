@@ -2,17 +2,38 @@ import React, { useState } from 'react';
 import "./UserSigninScreen.css";
 import { Link } from "react-router-dom";
 import login from "../../images/login.avif";
+import { signin } from '../../actions/userAuthAction';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { USER_SIGNIN_SUCCESS } from '../../constants/authConstants';
 
 const UserSigninScreen = () => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [cpassword, setCPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const submitData = (e) => {
+    e.preventDefault();
+    console.log({
+      email,
+      password
+    });
+
+    const userDetails = {
+      email, password
+    }
+
+    dispatch(signin(userDetails, toast))
+
+    setEmail("");
+    setPassword("");
+  }
+
   return (
     <>
       <div className="card mx-auto register__card">
-        <form>
+        <form onSubmit={submitData}>
           <div className="row g-0">
             <div className="col-lg-6 col-sm-12">
               <div className="card-body">
@@ -26,6 +47,7 @@ const UserSigninScreen = () => {
                       placeholder="Enter Email (eg. test@test.com)"
                       id="email"
                       name="email"
+                      value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required={true} />
                   </div>
@@ -38,6 +60,7 @@ const UserSigninScreen = () => {
                       placeholder="Enter Password"
                       id="password"
                       name="password"
+                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required={true}
                       minLength={6} />

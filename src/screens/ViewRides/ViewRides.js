@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ViewRides.css";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
 
 const ViewRides = () => {
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
+
+  const submitData = (e) => {
+    e.preventDefault();
+    console.log(start + " " + end);
+  }
+
   return (
     <>
-      <UserNavbar user={"Akshat Shah"} link={"/user"} />
+      <UserNavbar name={"Akshat Shah"} link={"/user"} />
 
       <h1 className="text-center mt-5 mb-4">View Rides</h1>
 
       <div className="container mb-5 mt-3">
         <div class="row justify-content-center padding">
           <div class="col-md-8 ftco-animate fadeInUp ftco-animated">
-            <form action="#" class="domain-form">
+            <form onSubmit={submitData} class="domain-form">
               <div class="form-group d-md-flex">
                 <input
                   type="text"
                   class="form-control px-4"
-                  placeholder="Enter start or end location..."
+                  placeholder="Enter start location..."
+                  value={start}
+                  name="startLocation"
+                  onChange={(e) => setStart(e.target.value)}
+                />
+                <span>&lt;--&gt;</span>
+                <input
+                  type="text"
+                  class="form-control px-4"
+                  placeholder="Enter end location..."
+                  value={end}
+                  name="endLocation"
+                  onChange={(e) => setEnd(e.target.value)}
                 />
                 <input
                   type="submit"

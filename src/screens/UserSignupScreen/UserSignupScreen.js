@@ -2,19 +2,88 @@ import React, { useRef, useState } from "react";
 import "./UserSignupScreen.css";
 import { Link } from "react-router-dom";
 import register from "../../images/register.avif";
+import { useDispatch } from "react-redux";
+import { signup } from "../../actions/userAuthAction";
+import { toast } from "react-toastify";
+import { USER_SIGNUP_SUCCESS } from "../../constants/authConstants";
 
 const UserSignupScreen = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
+  const [dob, setDob] = useState("");
+  const [contact, setContact] = useState();
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
+  const [role, setRole] = useState("");
+
+  const dispatch = useDispatch();
+
+  const submitData = (e) => {
+    e.preventDefault();
+    console.log({
+      fname,
+      lname,
+      email,
+      password,
+      cpassword,
+      dob,
+      contact,
+      address,
+      gender,
+      role
+    });
+
+    const userDetails = {
+      fname,
+      lname,
+      email,
+      password,
+      contact,
+      gender,
+      role,
+      dob,
+      address
+    }
+
+    dispatch(signup(userDetails, toast))
+
+    // fetch('http://localhost:8081/api/auth/signup', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userDetails),
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //   dispatch({
+    //     type: USER_SIGNUP_SUCCESS,
+    //     payload: data,
+    //   });
+    // })
+    // .catch(error => console.error('Error creating user:', error));
+
+    setFname(p => "");
+    setLname("");
+    setEmail("");
+    setPassword("");
+    setCPassword("");
+    setDob("");
+    setContact("");
+    setAddress("");
+    setGender("");
+    setRole("");
+
+  }
 
   const ref = useRef();
   return (
     <>
       <div className="card mx-auto register_card">
-        <form>
+        <form onSubmit={submitData}>
           <div className="row g-0">
             <div className="col-lg-6 col-sm-12">
               <img
@@ -36,9 +105,10 @@ const UserSignupScreen = () => {
                       type="text"
                       className="input__email"
                       placeholder="Enter Firstname"
-                      id="name"
-                      name="name"
-                      onChange={(e) => setFirstname(e.target.value)}
+                      id="fname"
+                      name="fname"
+                      value={fname}
+                      onChange={(e) => setFname(e.target.value)}
                       required={true}
                     />
                   </div>
@@ -48,9 +118,10 @@ const UserSignupScreen = () => {
                       type="text"
                       className="input__email"
                       placeholder="Enter Lastname"
-                      id="name"
-                      name="name"
-                      onChange={(e) => setLastname(e.target.value)}
+                      id="lname"
+                      name="lname"
+                      value={lname}
+                      onChange={(e) => setLname(e.target.value)}
                       required={true}
                     />
                   </div>
@@ -64,6 +135,7 @@ const UserSignupScreen = () => {
                       placeholder="Enter Email (eg. test@test.com)"
                       id="email"
                       name="email"
+                      value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required={true}
                     />
@@ -78,6 +150,7 @@ const UserSignupScreen = () => {
                       placeholder="Enter Password"
                       id="password"
                       name="password"
+                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required={true}
                       minLength={6}
@@ -91,6 +164,7 @@ const UserSignupScreen = () => {
                       placeholder="Confirm Password"
                       id="cpassword"
                       name="cpassword"
+                      value={cpassword}
                       onChange={(e) => setCPassword(e.target.value)}
                       required={true}
                       minLength={6}
@@ -104,9 +178,10 @@ const UserSignupScreen = () => {
                       type="number"
                       className="input__email"
                       placeholder="Enter contact number"
-                      id="email"
-                      name="email"
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="contact"
+                      name="contact"
+                      value={contact}
+                      onChange={(e) => setContact(e.target.value)}
                       required={true}
                     />
                   </div>
@@ -121,11 +196,26 @@ const UserSignupScreen = () => {
                       placeholder="Enter Date of Birth"
                       onFocus={() => (ref.current.type = "date")}
                       onBlur={() => (ref.current.type = "text")}
-                      id="password"
-                      name="password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      id="dob"
+                      name="dob"
+                      value={dob}
+                      onChange={(e) => setDob(e.target.value)}
                       required={true}
                       minLength={6}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12 col-sm-12">
+                    <i className="fa-solid fa-user email__icon"></i>
+                    <input
+                      type="text"
+                      className="input__email"
+                      placeholder="Enter Address"
+                      id="address"
+                      name="address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                     />
                   </div>
                 </div>
@@ -136,14 +226,27 @@ const UserSignupScreen = () => {
                         <label>Gender: </label>
                       </div>
                       <div className="col-md-3">
-                        <input type="radio" name="gender" value="male" /> Male
+                        <input type="radio" name="gender" value="MALE" checked={gender === "MALE"} onChange={(e) => setGender(e.target.value)} /> Male
                       </div>
                       <div className="col-md-3">
-                        <input type="radio" name="gender" value="female" />{" "}
+                        <input type="radio" name="gender" value="FEMALE" checked={gender === "FEMALE"} onChange={(e) => setGender(e.target.value)} />
                         Female
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row fw-bold text-muted mt-4 text-center">
+                  <div className="col-md-12 col-sm-12">
+                    <div className="row">
                       <div className="col-md-3">
-                        <input type="radio" name="gender" value="other" /> Other
+                        <label>Role: </label>
+                      </div>
+                      <div className="col-md-3">
+                        <input type="radio" name="role" value="ROLE_USER" checked={role === "ROLE_USER"} onChange={(e) => setRole(e.target.value)} /> User
+                      </div>
+                      <div className="col-md-3">
+                        <input type="radio" name="role" value="ROLE_DRIVER" checked={role === "ROLE_DRIVER"} onChange={(e) => setRole(e.target.value)} />
+                        Driver
                       </div>
                     </div>
                   </div>

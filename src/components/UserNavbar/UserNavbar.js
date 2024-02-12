@@ -3,6 +3,7 @@ import "./UserNavbar.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.png";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
+import user from "../../images/user.avif";
 
 const UserNavbar = (props) => {
   return (
@@ -34,7 +35,7 @@ const UserNavbar = (props) => {
             <ul class="navbar-nav">
               <li class="nav-item welcome">
                 <h5>
-                  Welcome! <span className="text-muted"> {props.user} </span>
+                  Welcome! <span className="text-muted"> {props.name} </span>
                 </h5>
               </li>{" "}
               <span className="divide">|</span>
@@ -61,17 +62,16 @@ const UserNavbar = (props) => {
         aria-hidden="true"
       >
         <div class="modal-dialog">
-          <div class="modal-content" style={{backgroundColor: "black"}}>
+          <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel" style={{color: "white"}}>
-                Profile
-              </h1>
+              
+                <img src={user} height="50" width="50" />
+                <span class="name mt-3 mx-2">Akshat Shah</span>
               <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                style={{color: "white"}}
               ></button>
             </div>
             <div class="modal-body">

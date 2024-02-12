@@ -9,7 +9,7 @@ import UserFooter from "../../components/UserFooter/UserFooter";
 const UserDashboard = () => {
   return (
     <>
-      <UserNavbar user={"Akshat Shah"} link={"/user"} />
+      <UserNavbar name={"Akshat Shah"} link={"/user"} />
 
       <div className="container my-3 text-center">
         <h1 className="mb-5 mt-5">User Dashboard</h1>
@@ -23,10 +23,10 @@ const UserDashboard = () => {
             </Link>
           </div>
           <div className="col-md-6">
-          <Link to="/user/reqRide">
+          <Link to="/user/bookings">
             <div class="card shadow p-1 user_card">
                 <img src={reqRideImg} alt="" />
-                <h4 className="mb-3 user_card_txt">Request a Ride</h4>
+                <h4 className="mb-3 user_card_txt">View Past Bookings</h4>
             </div>
         </Link>
           </div>

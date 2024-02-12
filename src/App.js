@@ -4,8 +4,6 @@ import DashboardScreen from './screens/DashboardScreen/DashboardScreen';
 import AdminSigninScreen from './screens/AdminSigninScreen/AdminSigninScreen';
 import UserSignupScreen from './screens/UserSignupScreen/UserSignupScreen';
 import UserSigninScreen from './screens/UserSigninScreen/UserSigninScreen';
-import DriverSignupScreen from './screens/DriverSignupScreen/DriverSignupScreen';
-import DriverSigninScreen from './screens/DriverSigninScreen/DriverSigninScreen';
 import NotFoundScreen from './screens/NotFoundScreen/NotFoundScreen';
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +19,7 @@ import PublishRide from './screens/PublishRide/PublishRide';
 import AddVehicle from './screens/AddVehicle/AddVehicle';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import EditProfile from './screens/EditProfile/EditProfile';
+import PastBookings from './screens/PastBookings/PastBookings';
 
 function App() {
   //var token = window.sessionStorage.getItem("loginToken")
@@ -37,11 +36,10 @@ function App() {
           <Route path="/admin/home" element={<AdminScreen />} /> 
           <Route path="/user/signup" element={<UserSignupScreen />} />
           <Route path="/user/signin" element={<UserSigninScreen />} />
-          <Route path="/driver/signup" element={<DriverSignupScreen />} />
-          <Route path="/driver/signin" element={<DriverSigninScreen />} />
           <Route path="/user" element={<UserDashboard />} />
           <Route path="/user/viewRides" element={<ViewRides />} />
           <Route path="/user/reqRide" element={<ReqRide />} />
+          <Route path="/user/bookings" element={<PastBookings />} />
           <Route path="/driver" element={<DriverDashboard />} />
           <Route path="/driver/addVehicle" element={<AddVehicle />} />
           <Route path="/driver/searchRideRequest" element={<SearchRideReq />} />

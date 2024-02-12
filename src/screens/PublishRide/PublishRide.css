@@ -5,6 +5,13 @@
     margin-left: 5%;
 }
 
+.publish_ride_left{
+    max-height: 30rem;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(94, 137, 237) transparent;
+}
+
 .publish_ride_labels{
     font-size: 1rem;
     margin-top: 7%;

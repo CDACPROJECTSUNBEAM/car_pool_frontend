@@ -23,7 +23,6 @@ const Header = (props) => {
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Login </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <li><Link class="dropdown-item" to="/user/signIn">User</Link></li>
-                  <li><Link class="dropdown-item" to="/driver/signIn">Driver</Link></li>
                   <li><Link class="dropdown-item" to="/admin">Admin</Link></li>
                 </ul>
               </li>

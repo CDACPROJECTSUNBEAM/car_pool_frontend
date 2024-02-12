@@ -19,7 +19,7 @@ const AddVehicle = () => {
           <div className="col-md-6">
             <center>
               <br></br>
-              <h1 style={{ fontSize: "50px" }}>Add Vehicle Details</h1>
+              <h1 style={{ fontSize: "35px" }}>Add Vehicle Details</h1>
             </center>
             <br></br>
 
@@ -75,9 +75,19 @@ const AddVehicle = () => {
                 <label for="floatingInput">Adhar Card Number</label>
               </div>
 
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="Licence Number"
+                />
+                <label for="floatingInput">Licence</label>
+              </div>
+
               <div class="d-grid">
                 <button
-                  class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                  class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 mt-3"
                   type="submit"
                 >
                   Add Vehicle

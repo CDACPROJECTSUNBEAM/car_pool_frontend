@@ -6,11 +6,12 @@ import addVehicle from "../../images/addVehicle.jpg";
 import { Link } from "react-router-dom";
 import DriverNavbar from "../../components/DriverNavbar/DriverNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
+import UserNavbar from "../../components/UserNavbar/UserNavbar";
 
 const UserDashboard = () => {
   return (
     <>
-      <DriverNavbar driver={"Driver"} link={"/driver"} />
+      <UserNavbar name={"Driver"} link={"/driver"} />
 
       <div className="container my-3 text-center">
         <h1 className="mb-5 mt-5">Driver Dashboard</h1>
