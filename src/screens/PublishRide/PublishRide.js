@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PublishRide.css";
 import DriverNavbar from "../../components/DriverNavbar/DriverNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
 import publishRide from "../../images/publishRide.jpg";
+import {useDispatch, useSelector} from "react-redux";
+import { getAllCities } from "../../actions/adminAuthAction";
 
 const PublishRide = () => {
+  const dispatch = useDispatch();
+
+  const data = useSelector(state => state.cities);
+  let cities = data.response;
+
+  console.log(cities);
+
+  useEffect(() => {
+    dispatch(getAllCities());
+  }, [])
+
   return (
     <>
       <DriverNavbar driver={"Driver"} link={"/driver"} />
@@ -37,16 +50,13 @@ const PublishRide = () => {
                       id="city-names"
                       style={{ width: "100%", height: "100%" }}
                     >
-                      <option value="Pune">Pune</option>
-                      <option value="Mumbai">Mumbai</option>
-                      <option value="Solapur">Solapur</option>
-                      <option value="Nagpur">Nagpur</option>
-                      <option value="Nashik">Nashik</option>
-                      <option value="Kolhapur">Kolhapur</option>
-                      <option value="Jalgaon">Jalgaon</option>
-                      <option value="Amravati">Amravati</option>
-                      <option value="Thane">Thane</option>
-                      <option value="Panvel">Panvel</option>
+                      {
+                        cities && cities.map((c) => (
+                          <option value={c.city}>{c.city}</option>
+                        ))
+                      }
+                      
+                      
                     </select>
                   </div>
                 </div>
@@ -71,16 +81,11 @@ const PublishRide = () => {
                       id="city-names"
                       style={{ width: "100%", height: "100%" }}
                     >
-                      <option value="Pune">Pune</option>
-                      <option value="Mumbai">Mumbai</option>
-                      <option value="Solapur">Solapur</option>
-                      <option value="Nagpur">Nagpur</option>
-                      <option value="Nashik">Nashik</option>
-                      <option value="Kolhapur">Kolhapur</option>
-                      <option value="Jalgaon">Jalgaon</option>
-                      <option value="Amravati">Amravati</option>
-                      <option value="Thane">Thane</option>
-                      <option value="Panvel">Panvel</option>
+                      {
+                        cities && cities.map((c) => (
+                          <option value={c.city}>{c.city}</option>
+                        ))
+                      }
                     </select>
                   </div>
                 </div>
