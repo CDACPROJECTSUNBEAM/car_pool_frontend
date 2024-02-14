@@ -2,11 +2,14 @@ import React from "react";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
 import "./PastBookings.css";
+import { useSelector } from "react-redux";
 
 const PastBookings = () => {
+    const data = useSelector(state => state.userSignin);
+  let user = data.response;
   return (
     <>
-      <UserNavbar user={"Akshat Shah"} link={"/user"} />
+      <UserNavbar user={user} link={"/user"} />
 
     <div className="container mt-5 past_bookings_container">
     <table class="table">

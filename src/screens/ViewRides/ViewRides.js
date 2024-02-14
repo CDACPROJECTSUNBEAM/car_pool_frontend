@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import "./ViewRides.css";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
+import { useSelector } from "react-redux";
 
 const ViewRides = () => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+
+  const data = useSelector(state => state.userSignin);
+  let user = data.response;
 
   const submitData = (e) => {
     e.preventDefault();
@@ -14,7 +18,7 @@ const ViewRides = () => {
 
   return (
     <>
-      <UserNavbar name={"Akshat Shah"} link={"/user"} />
+      <UserNavbar user={user} link={"/user"} />
 
       <h1 className="text-center mt-5 mb-4">View Rides</h1>
 

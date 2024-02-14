@@ -86,11 +86,11 @@ export const signup = (userDetails, toast) => (dispatch) => {
 export const updateProfileDetails = (userDetails, toast) => (dispatch) => {
 
   dispatch({
-    type: USER_SIGNUP_REQUEST,
+    type: USER_SIGNIN_REQUEST,
   });
 
   fetch(`http://localhost:8081/api/auth/updateProfile/${userDetails.id}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -99,14 +99,14 @@ export const updateProfileDetails = (userDetails, toast) => (dispatch) => {
     .then(response => response.json())
     .then(data => {
       dispatch({
-        type: USER_SIGNUP_SUCCESS,
+        type: USER_SIGNIN_SUCCESS,
         payload: data,
       });
       toast.success("Profile update successful");
     })
     .catch(error => {
           dispatch({
-        type: USER_SIGNUP_FAILURE,
+        type: USER_SIGNIN_FAILURE,
         payload: "Profile updation error!!",
       });
       toast.error("Profile updation error");
