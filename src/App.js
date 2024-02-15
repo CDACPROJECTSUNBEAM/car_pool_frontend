@@ -23,7 +23,6 @@ import SearchRideReq from "./screens/SearchRideReq/SearchRideReq";
 import PublishRide from "./screens/PublishRide/PublishRide";
 import AddVehicle from "./screens/AddVehicle/AddVehicle";
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
-import EditProfile from "./screens/EditProfile/EditProfile";
 import PastBookings from "./screens/PastBookings/PastBookings";
 import StatesScreen from "./screens/StatesScreen/StatesScreen";
 import CityScreen from "./screens/CityScreen/CityScreen";
@@ -50,7 +49,6 @@ function App() {
           <Route path="/driver/searchRideRequest" element={<SearchRideReq />} />
           <Route path="/driver/publishRide" element={<PublishRide />} />
           <Route path="/profile" element={<ProfileScreen />} />
-          <Route path="/editProfile" element={<EditProfile />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
         <ToastContainer theme="dark" />

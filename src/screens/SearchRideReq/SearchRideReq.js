@@ -2,11 +2,15 @@ import React from "react";
 import "./SearchRideReq.css";
 import DriverNavbar from "../../components/DriverNavbar/DriverNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
+import { useSelector } from "react-redux";
+import UserNavbar from "../../components/UserNavbar/UserNavbar";
 
 const SearchRideReq = () => {
+  const userData = useSelector(state => state.userSignin);
+  let user = userData.response;
   return (
     <>
-      <DriverNavbar driver={"Driver"} link={"/driver"} />
+      <UserNavbar user={user} link={"/driver"} />
 
       <div className="container bootstrap snippets bootdeys">
         <h3 className="text-center mt-4">Ride Requests</h3>

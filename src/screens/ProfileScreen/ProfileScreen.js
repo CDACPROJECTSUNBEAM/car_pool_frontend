@@ -3,6 +3,7 @@ import "./ProfileScreen.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateProfileDetails } from "../../actions/userAuthAction";
+import { useNavigate } from "react-router-dom";
 
 const ProfileScreen = () => {
   const [toggle, setToggle] = useState(false);
@@ -18,8 +19,11 @@ const ProfileScreen = () => {
   const data = useSelector((state) => state.userSignin);
   let user = data.response;
 
+  const navigate = useNavigate();
+
   const onEditClick = () => {
     setToggle(true);
+    //navigate("/editProfile")
   };
 
   const dispatch = useDispatch();
@@ -32,8 +36,7 @@ const ProfileScreen = () => {
     setContact(user.contact);
     setAddress(user.address);
     setGender(user.gender);
-  }, [])
-  
+  }, []);
 
   const updateProfile = (e) => {
     e.preventDefault();
@@ -49,7 +52,7 @@ const ProfileScreen = () => {
     };
 
     dispatch(updateProfileDetails(updateDetails, toast));
-
+    
     setToggle(false);
   };
 
@@ -235,7 +238,8 @@ const ProfileScreen = () => {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">
+            <button type="submit" class="btn btn-primary mt-3" data-bs-dismiss="modal"
+                aria-label="Close">
               Update
             </button>
           </form>

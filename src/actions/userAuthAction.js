@@ -2,6 +2,7 @@ import {
   USER_SIGNIN_FAILURE,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
+  USER_SIGNOUT,
   USER_SIGNUP_FAILURE,
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
@@ -115,10 +116,33 @@ export const updateProfileDetails = (userDetails, toast) => (dispatch) => {
 
 export const logout = (toast, navigate) => (dispatch) => {
         dispatch({
-          type: USER_SIGNIN_SUCCESS,
-          payload: "",
-          authenticate: false,
+          type: USER_SIGNOUT,
         });
         toast.error("Logged Out Successfully");
         navigate("/");
+};
+
+export const getUser = (id) => (dispatch) => {
+  dispatch({
+    type: USER_SIGNIN_REQUEST,
+  });
+
+  fetch(`http://localhost:8081/api/auth/get/user/${id}`, {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        dispatch({
+          type: USER_SIGNIN_SUCCESS,
+          payload: data,
+          authenticate: true,
+        });
+    })
+    .catch(error => {
+      dispatch({
+        type: USER_SIGNIN_FAILURE,
+        payload: "Error in loading cities",
+        authenticate: false,
+      });
+    });
 };

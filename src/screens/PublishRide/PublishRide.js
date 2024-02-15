@@ -5,12 +5,16 @@ import UserFooter from "../../components/UserFooter/UserFooter";
 import publishRide from "../../images/publishRide.jpg";
 import {useDispatch, useSelector} from "react-redux";
 import { getAllCities } from "../../actions/adminAuthAction";
+import UserNavbar from "../../components/UserNavbar/UserNavbar";
 
 const PublishRide = () => {
   const dispatch = useDispatch();
 
   const data = useSelector(state => state.cities);
   let cities = data.response;
+
+  const userData = useSelector(state => state.userSignin);
+  let user = userData.response;
 
   console.log(cities);
 
@@ -20,7 +24,7 @@ const PublishRide = () => {
 
   return (
     <>
-      <DriverNavbar driver={"Driver"} link={"/driver"} />
+      <UserNavbar user={user} link={"/driver"} />
 
       <div className="container">
         <div className="row">

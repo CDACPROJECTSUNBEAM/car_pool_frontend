@@ -1,13 +1,22 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import "./Header.css";
+import logo from "../../images/carLogo.png";
 
 const Header = (props) => {
   return (
     <>
       <nav class={`navbar navbar-expand-lg navbar-light bg-light ${props.prop_name} shadow`}>
         <div class="container-fluid">
-          <Link class="navbar-brand" to="/">Ride My Way</Link>
+          <Link class="navbar-brand" to="/" style={{fontWeight: "bold", letterSpacing: "2px", color: "#0574cf"}}>
+          <img
+              src={logo}
+              alt="profile"
+              style={{ width: "7%", height: "7%", marginLeft: "2%", marginRight: "1%" }}
+              className="brand_logo"
+            />
+            <span className="brand_name">SwiftRide</span>
+          </Link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

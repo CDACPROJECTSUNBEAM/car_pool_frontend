@@ -26,7 +26,7 @@ const DashboardScreen = () => {
             </h1>
             <br />
             <p className="text-center p-1">
-              Ride-My-Way is a carpooling application that provides drivers{" "}
+              SwiftRide is a carpooling application that provides drivers{" "}
               <br /> with the ability to create ride offers and passengers to
               join <br /> available ride offers.
             </p>

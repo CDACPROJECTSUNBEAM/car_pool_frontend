@@ -23,6 +23,9 @@ const StatesScreen = () => {
     let stateDetails = {state};
     
     dispatch(addState(stateDetails, toast));
+    setTimeout(() => {
+      dispatch(getAllStates());
+    }, 700);
 
     setState("");
   }
@@ -83,7 +86,8 @@ const StatesScreen = () => {
                     onChange={(e) => setState(e.target.value)}
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                aria-label="Close">
                   Add
                 </button>
               </form>

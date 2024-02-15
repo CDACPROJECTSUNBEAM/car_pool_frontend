@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserNavbar from "../../components/UserNavbar/UserNavbar";
 import UserFooter from "../../components/UserFooter/UserFooter";
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 const CityScreen = () => {
   const [cityName, setCityName] = useState("");
   const [stateName, setStateName] = useState("");
+
   const data = useSelector((state) => state.userSignin);
   let user = data.response;
   const statesData = useSelector((state) => state.states);
@@ -21,17 +22,21 @@ const CityScreen = () => {
   const citiesData = useSelector((state) => state.cities);
   let cities = citiesData.response;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllStates());
     dispatch(getAllCities());
   }, []);
 
-  const submitData = async (e) => {
+  const submitData = (e) => {
     e.preventDefault();
 
     let cityDetails = { cityName, stateName };
 
     dispatch(addCity(cityDetails, toast));
+    setTimeout(() => {
+      dispatch(getAllCities());
+    }, 700);
 
     setCityName("");
     setStateName("");
@@ -63,7 +68,7 @@ const CityScreen = () => {
         </div>
       </div>
 
-      {/* Profile Modal */}
+      {/* City Modal */}
       <div
         class="modal fade"
         id="exampleModal3"
@@ -132,7 +137,9 @@ const CityScreen = () => {
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-3">
+                <button type="submit" class="btn btn-primary mt-3"
+                data-bs-dismiss="modal"
+                aria-label="Close">
                   Add
                 </button>
               </form>

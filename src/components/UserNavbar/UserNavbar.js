@@ -1,16 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./UserNavbar.css";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../images/logo.png";
+import logo from "../../images/carLogo.png";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
-import user from "../../images/user.avif";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { logout } from "../../actions/userAuthAction";
+import userImg from "../../images/user.avif";
 
 const UserNavbar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const data = useSelector(state => state.userSignin);
+  let user = data.response;
+
+  const stateRef = useRef(user);
+
+  useEffect(() => {
+    
+    setTimeout(() => {
+      stateRef.current = user;
+    console.log(stateRef.current?.fname);
+    }, 2000);
+  }, [user])
+  
   const logoutUser = () => {
     dispatch(logout(toast, navigate));
   }
@@ -20,13 +34,13 @@ const UserNavbar = (props) => {
       <nav class={`navbar navbar-expand-lg navbar-light bg-light shadow`}>
         <div class="container-fluid">
           <Link class="navbar-brand fw-bold" to={props.link}>
-            <span className="brand_name">Ride My Way</span>
             <img
               src={logo}
-              alt=""
-              style={{ width: "7%", height: "7%", marginLeft: "2%" }}
+              alt="profile"
+              style={{ width: "7%", height: "7%", marginLeft: "2%", marginRight: "1%" }}
               className="brand_logo"
             />
+            <span className="brand_name">SwiftRide</span>
           </Link>
           <button
             class="navbar-toggler"
@@ -43,12 +57,14 @@ const UserNavbar = (props) => {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
             <ul class="navbar-nav">
               <li class="nav-item welcome">
-                {
-                  props.user.fname &&
-                  <h5>
-                  Welcome! <span className="text-muted"> {props.user.fname + " " + props.user.lname} </span>
+              
+                  {
+                    !data.loading &&
+                    <h5>
+                  Welcome! <span className="text-muted"> {stateRef.current?.fname + " " + stateRef.current?.lname} </span>
                 </h5>
                 }
+                
                 
               </li>{" "}
               <span className="divide">|</span>
@@ -78,8 +94,11 @@ const UserNavbar = (props) => {
           <div class="modal-content">
             <div class="modal-header">
               
-                <img src={user} height="50" width="50" />
-                <span class="name mt-3 mx-2">{props.user.fname + " " + props.user.lname}</span>
+                <img src={userImg} alt="profile" height="50" width="50" />
+                
+                  <span class="name mt-3 mx-2">{stateRef.current?.fname + " " + stateRef.current?.lname}</span>
+                
+                
               <button
                 type="button"
                 class="btn-close"
