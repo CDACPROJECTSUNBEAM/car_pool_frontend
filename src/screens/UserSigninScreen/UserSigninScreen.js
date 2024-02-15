@@ -10,9 +10,41 @@ import Header from "../../components/Header/Header";
 const UserSigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [validation, setValidation] = useState({
+    email: "",
+    password: "",
+  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+  const emailValue = (e) => {
+    setEmail(e.target.value)
+    // if(e.target?.value && e.target.value.match(isValidEmail)){
+    //   setValidation({
+    //     email: ""
+    //   })
+    // }else{
+    //   setValidation({
+    //     email: "Invalid email"
+    //   })
+    // }
+  }
+
+  const passwordValue = (e) => {
+    setPassword(e.target.value);
+    if(password.length < 6){
+      setValidation({
+        password: "Invalid password!!"
+      })
+    }else{
+      setValidation({
+        password: ""
+      })
+    }
+  }
 
 
   const submitData = (e) => {
@@ -22,14 +54,17 @@ const UserSigninScreen = () => {
       password
     });
 
-    const userDetails = {
-      email, password
+    if(validation.password === ""){
+      const userDetails = {
+        email, password
+      }
+  
+      dispatch(signin(userDetails, toast, navigate))
+  
+      setEmail("");
+      setPassword("");
     }
 
-    dispatch(signin(userDetails, toast, navigate))
-
-    setEmail("");
-    setPassword("");
   }
 
   return (
@@ -51,8 +86,11 @@ const UserSigninScreen = () => {
                       id="email"
                       name="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={emailValue}
                       required={true} />
+                      <div className="d-flex justify-content-center mt-1">
+                      <span class="badge text-bg-danger">{validation.email}</span>
+                      </div>
                   </div>
                 </div>
                 <div className="row">
@@ -64,9 +102,12 @@ const UserSigninScreen = () => {
                       id="password"
                       name="password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={passwordValue}
                       required={true}
-                      minLength={6} />
+                       />
+                      <div className="d-flex justify-content-center mt-1">
+                      <span class="badge text-bg-danger">{validation.password}</span>
+                      </div>
                   </div>
                 </div>
                 <div className="row">
